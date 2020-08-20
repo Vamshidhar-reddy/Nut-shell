@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:nutshell/database.dart';
 import 'package:nutshell/users.dart';
+import 'package:intl/intl.dart';
 import '../global.dart' as global;
 
 class Pricing extends StatefulWidget {
@@ -38,7 +39,6 @@ class _PricingState extends State<Pricing> {
         Timestamp t1 = _currentUser.expiryDate;
         d1 = t1.toDate();
         DateTime d = t.toDate();
-
         // var created = converTimeStamp();
 
         today = d == null ? DateTime.now() : d;
@@ -165,7 +165,7 @@ class _PricingState extends State<Pricing> {
                                 fontSize: 20.0, fontWeight: FontWeight.w700),
                           ),
                           Text(
-                            d1.toString(),
+                            DateFormat('dd-MM-yyyy').format(d1),
                             style: TextStyle(
                                 fontSize: 20.0, fontWeight: FontWeight.w700),
                           ),

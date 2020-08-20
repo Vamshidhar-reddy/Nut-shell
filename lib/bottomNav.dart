@@ -69,9 +69,6 @@ class _BottomBarState extends State<BottomBar> {
                           children: [
                             Text(
                               'Your Plan has been Expired \nPlease Extend Your Plan to \n Continue Services',
-                              style: TextStyle(
-                                  fontSize: MediaQuery.of(context).size.height *
-                                      0.02),
                             ),
                             SizedBox(
                               height: 15.0,
@@ -86,11 +83,8 @@ class _BottomBarState extends State<BottomBar> {
                                   child: Text(
                                     'Extend',
                                     style: TextStyle(
-                                        color: Color.fromRGBO(109, 0, 109, 1),
-                                        fontSize:
-                                            MediaQuery.of(context).size.height *
-                                                0.02,
-                                        fontWeight: FontWeight.bold),
+                                      color: Color.fromRGBO(109, 0, 109, 1),
+                                    ),
                                   ),
                                 ),
                                 // FlatButton(
