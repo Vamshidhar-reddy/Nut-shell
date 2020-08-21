@@ -22,6 +22,17 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
           "Terms and Conditions",
           style: TextStyle(color: Colors.black),
         ),
+        leading: new IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            size: 30.0,
+            color: Colors.black,
+          ),
+          tooltip: 'back',
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         backgroundColor: Colors.white,
       ),
       body: WillPopScope(

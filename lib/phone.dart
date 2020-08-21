@@ -75,98 +75,101 @@ class _PhoneState extends State<Phone> {
             size: 80.0,
           ),
         ),
-        body: Container(
-          padding: EdgeInsets.only(left: 25.0, top: 10.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                'Please enter \nyour number',
-                style: TextStyle(
-                    fontSize: 55.0,
-                    fontWeight: FontWeight.bold,
-                    color: Color.fromRGBO(109, 0, 109, 1)),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.03,
-              ),
-              Text(
-                'This number will be used to login to your \naccount via otp.',
-                style: TextStyle(
-                    fontSize: 25.0,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.grey),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.05,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 28.0),
-                child: TextFormField(
-                  autovalidate: true,
-                  validator: (String txt) {
-                    this.phoneNo = "+91" + txt;
-                    if (txt.length >= 1) {
-                      Future.delayed(Duration.zero).then((_) {
-                        setState(() {
-                          btn_enable = true;
-                        });
-                      });
-                    } else {
-                      Future.delayed(Duration.zero).then((_) {
-                        setState(() {
-                          btn_enable = false;
-                        });
-                      });
-                    }
-                  },
-                  style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w600),
-                  cursorWidth: 2.0,
-                  cursorRadius: Radius.circular(10),
-                  keyboardType: TextInputType.phone,
-                  maxLength: 10,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15.0)),
-                      counterText: '',
-                      prefix: Text(
-                        '+91\t',
-                        style: TextStyle(
-                            fontSize: 30.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey),
-                      )),
+        body: ListView(children: [
+          Container(
+            padding: EdgeInsets.only(left: 25.0, top: 10.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  'Please enter \nyour number',
+                  style: TextStyle(
+                      fontSize: 55.0,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromRGBO(109, 0, 109, 1)),
                 ),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.1,
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.07,
-                width: MediaQuery.of(context).size.width * 0.95,
-                child: RaisedButton(
-                  color: Color.fromRGBO(109, 0, 109, 1),
-                  disabledColor: Colors.grey,
-                  onPressed: btn_enable == true
-                      ? () {
-                          phoneValidator(phoneNo);
-                        }
-                      : null,
-                  child: Text(
-                    'Login with Phone',
-                    style: TextStyle(
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.03,
+                ),
+                Text(
+                  'This number will be used to login to your \naccount via otp.',
+                  style: TextStyle(
+                      fontSize: 25.0,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.grey),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.05,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 28.0),
+                  child: TextFormField(
+                    autovalidate: true,
+                    validator: (String txt) {
+                      this.phoneNo = "+91" + txt;
+                      if (txt.length >= 1) {
+                        Future.delayed(Duration.zero).then((_) {
+                          setState(() {
+                            btn_enable = true;
+                          });
+                        });
+                      } else {
+                        Future.delayed(Duration.zero).then((_) {
+                          setState(() {
+                            btn_enable = false;
+                          });
+                        });
+                      }
+                    },
+                    style:
+                        TextStyle(fontSize: 30.0, fontWeight: FontWeight.w600),
+                    cursorWidth: 2.0,
+                    cursorRadius: Radius.circular(10),
+                    keyboardType: TextInputType.phone,
+                    maxLength: 10,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15.0)),
+                        counterText: '',
+                        prefix: Text(
+                          '+91\t',
+                          style: TextStyle(
+                              fontSize: 30.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey),
+                        )),
                   ),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25.0)),
                 ),
-              ),
-            ],
-          ),
-        ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.1,
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.07,
+                  width: MediaQuery.of(context).size.width * 0.95,
+                  child: RaisedButton(
+                    color: Color.fromRGBO(109, 0, 109, 1),
+                    disabledColor: Colors.grey,
+                    onPressed: btn_enable == true
+                        ? () {
+                            phoneValidator(phoneNo);
+                          }
+                        : null,
+                    child: Text(
+                      'Login with Phone',
+                      style: TextStyle(
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25.0)),
+                  ),
+                ),
+              ],
+            ),
+          )
+        ]),
       ),
     );
   }

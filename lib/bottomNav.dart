@@ -51,58 +51,97 @@ class _BottomBarState extends State<BottomBar> {
               barrierDismissible: false,
               context: context,
               builder: (_) => new Dialog(
-                      child: WillPopScope(
-                    onWillPop: () {
-                      SystemNavigator.pop();
-                    },
-                    child: new Container(
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage('assets/image/details.png'),
-                                fit: BoxFit.fill)),
-                        alignment: FractionalOffset.center,
-                        height: MediaQuery.of(context).size.height * 0.22,
-                        width: MediaQuery.of(context).size.width * 0.65,
-                        padding: const EdgeInsets.all(20.0),
-                        child: new Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Your Plan has been Expired \nPlease Extend Your Plan to \n Continue Services',
-                            ),
-                            SizedBox(
-                              height: 15.0,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                FlatButton(
-                                  onPressed: () {
-                                    Navigator.pushNamed(context, '/extendplan');
-                                  },
-                                  child: Text(
-                                    'Extend',
-                                    style: TextStyle(
-                                      color: Color.fromRGBO(109, 0, 109, 1),
+                    child: WillPopScope(
+                        child: Container(
+                            margin: EdgeInsets.all(10),
+                            // width: MediaQuery.of(context).size.width*0.7,
+                            child: IntrinsicHeight(
+                              child: ConstrainedBox(
+                                constraints: BoxConstraints(
+                                    minHeight: 95, minWidth: 200),
+                                child: Column(
+                                  children: [
+                                    SizedBox(
+                                      height: 15,
                                     ),
-                                  ),
+                                    Text(
+                                      'Your Plan has been Expired,Please extend your Plan to continue the Services',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    SizedBox(
+                                      height: 10.0,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        FlatButton(
+                                          onPressed: () {
+                                            Navigator.pushNamed(
+                                                context, '/extendplan');
+                                          },
+                                          child: Text(
+                                            'Extend',
+                                            style: TextStyle(
+                                              fontSize: 24,
+                                              color: Color.fromRGBO(
+                                                  109, 0, 109, 1),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  ],
                                 ),
-                                // FlatButton(
-                                //   onPressed: () {
-                                //     SystemNavigator.pop();
-                                //   },
-                                //   child: Text(
-                                //     'No',
-                                //     style: TextStyle(
-                                //         color: Colors.deepOrange,
-                                //         fontSize: 20.0),
-                                //   ),
-                                // )
-                              ],
-                            )
-                          ],
-                        )),
-                  )));
+                              ),
+                            )),
+                        onWillPop: () => SystemNavigator.pop()),
+                  ));
+          // showDialog(
+          //     barrierDismissible: false,
+          //     context: context,
+          //     builder: (_) => new Dialog(
+          //             child: WillPopScope(
+          //           onWillPop: () {
+          //             SystemNavigator.pop();
+          //           },
+          //           child: new Container(
+          //               decoration: BoxDecoration(
+          //                   image: DecorationImage(
+          //                       image: AssetImage('assets/image/details.png'),
+          //                       fit: BoxFit.fill)),
+          //               alignment: FractionalOffset.center,
+          //               height: MediaQuery.of(context).size.height * 0.22,
+          //               width: MediaQuery.of(context).size.width * 0.65,
+          //               padding: const EdgeInsets.all(20.0),
+          //               child: new Column(
+          //                 mainAxisAlignment: MainAxisAlignment.start,
+          //                 children: [
+          //                   Text(
+          //                     'Your Plan has been Expired \nPlease Extend Your Plan to \n Continue Services',
+          //                   ),
+          //                   SizedBox(
+          //                     height: 15.0,
+          //                   ),
+          //                   Row(
+          //                     mainAxisAlignment: MainAxisAlignment.end,
+          //                     children: [
+          //                       FlatButton(
+          //                         onPressed: () {
+          //                           Navigator.pushNamed(context, '/extendplan');
+          //                         },
+          //                         child: Text(
+          //                           'Extend',
+          //                           style: TextStyle(
+          //                             color: Color.fromRGBO(109, 0, 109, 1),
+          //                           ),
+          //                         ),
+          //                       ),
+
+          //                     ],
+          //                   )
+          //                 ],
+          //               )),
+          //         )));
         }
         // print(diff.inDays);
       }

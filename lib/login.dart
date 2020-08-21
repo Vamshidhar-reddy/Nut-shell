@@ -85,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
               signInWithGoogle(context);
             },
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 Image.asset('assets/images/google.png'),
                 Text(
@@ -113,16 +113,16 @@ class _LoginScreenState extends State<LoginScreen> {
         child: RaisedButton(
           color: Colors.white,
           onPressed: () {
-            print("clicked 1");
+            // print("clicked 1");
             Navigator.of(context).push(new MaterialPageRoute(
                 builder: (BuildContext context) => new Phone()));
           },
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               Icon(
                 Icons.phone,
-                size: 35.0,
+                size: 46.0,
                 color: Colors.blue,
               ),
               Text(

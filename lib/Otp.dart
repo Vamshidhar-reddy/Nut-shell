@@ -322,134 +322,140 @@ class _OtpState extends State<Otp> with TickerProviderStateMixin {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => Phone()));
           },
-          child: SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.only(
-                  left: 20.0, top: 20.0, right: 10.0, bottom: 15.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.1,
-                  ),
-                  Text(
-                    'Please wait while we \nauto verify the otp.',
-                    style: TextStyle(
-                        fontSize: 40.0,
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromRGBO(109, 0, 109, 1)),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.03,
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.1,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          '0:30',
-                          style: TextStyle(
-                              fontSize: 23,
-                              color: _resendEnble ? Colors.black : Colors.grey),
-                        ),
-                        FlatButton(
-                          onPressed: () => _resendEnble ? verifyPhone() : null,
-                          child: Text(
-                            'Resend otp',
+          child: ListView(children: [
+            SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.only(
+                    left: 20.0, top: 20.0, right: 10.0, bottom: 15.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.1,
+                    ),
+                    Text(
+                      'Please wait while we \nauto verify the otp.',
+                      style: TextStyle(
+                          fontSize: 40.0,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromRGBO(109, 0, 109, 1)),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.03,
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.1,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            '0:30',
                             style: TextStyle(
                                 fontSize: 23,
                                 color:
                                     _resendEnble ? Colors.black : Colors.grey),
                           ),
-                        )
-                      ],
-                    ),
-                  ),
-                  PinCodeTextField(
-                    enabled: _pinEnable,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    length: 6,
-                    autoValidate: true,
-                    obsecureText: false,
-                    enableActiveFill: true,
-                    animationType: AnimationType.fade,
-                    pinTheme: PinTheme(
-                        shape: PinCodeFieldShape.box,
-                        borderRadius: BorderRadius.circular(10),
-                        fieldHeight: 60,
-                        fieldWidth: 45,
-                        activeFillColor: Colors.grey[300],
-                        inactiveFillColor: Colors.grey[300],
-                        selectedFillColor: Colors.white,
-                        inactiveColor: Colors.grey),
-                    animationDuration: Duration(milliseconds: 300),
-                    errorAnimationController: errorController,
-                    controller: textEditingController,
-                    onCompleted: (v) {
-                      print("Completed");
-                    },
-                    validator: (v) {
-                      if (v.length == 6) {
-                        setState(() {
-                          _isLoading = true;
-                        });
-                        Future.delayed(Duration(seconds: 5));
-                        setState(() {
-                          _isLoading = false;
-                        });
-
-                        _continueEnble = true;
-                      } else {
-                        _continueEnble = false;
-                      }
-                    },
-                    onChanged: (value) {
-                      print(value);
-
-                      setState(() {
-                        currentText = value;
-                      });
-                    },
-                    beforeTextPaste: (text) {
-                      print("Allowing to paste $text");
-                      //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
-                      //but you can show anything you want here, like your pop up saying wrong paste format or etc
-                      return true;
-                    },
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.05,
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.1,
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.07,
-                    width: MediaQuery.of(context).size.width * 0.95,
-                    child: RaisedButton(
-                      color:
-                          _continueEnble ? Colors.redAccent[700] : Colors.grey,
-                      onPressed: () =>
-                          _continueEnble ? SmsValidator(currentText) : null,
-                      child: _isLoading
-                          ? CircularProgressIndicator()
-                          : Text(
-                              'Continue',
+                          FlatButton(
+                            onPressed: () =>
+                                _resendEnble ? verifyPhone() : null,
+                            child: Text(
+                              'Resend otp',
                               style: TextStyle(
-                                  fontSize: 30.0,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
+                                  fontSize: 23,
+                                  color: _resendEnble
+                                      ? Colors.black
+                                      : Colors.grey),
                             ),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25.0)),
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                    PinCodeTextField(
+                      enabled: _pinEnable,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      length: 6,
+                      autoValidate: true,
+                      obsecureText: false,
+                      enableActiveFill: true,
+                      animationType: AnimationType.fade,
+                      pinTheme: PinTheme(
+                          shape: PinCodeFieldShape.box,
+                          borderRadius: BorderRadius.circular(10),
+                          fieldHeight: 60,
+                          fieldWidth: 45,
+                          activeFillColor: Colors.grey[300],
+                          inactiveFillColor: Colors.grey[300],
+                          selectedFillColor: Colors.white,
+                          inactiveColor: Colors.grey),
+                      animationDuration: Duration(milliseconds: 300),
+                      errorAnimationController: errorController,
+                      controller: textEditingController,
+                      onCompleted: (v) {
+                        print("Completed");
+                      },
+                      validator: (v) {
+                        if (v.length == 6) {
+                          setState(() {
+                            _isLoading = true;
+                          });
+                          Future.delayed(Duration(seconds: 5));
+                          setState(() {
+                            _isLoading = false;
+                          });
+
+                          _continueEnble = true;
+                        } else {
+                          _continueEnble = false;
+                        }
+                      },
+                      onChanged: (value) {
+                        print(value);
+
+                        setState(() {
+                          currentText = value;
+                        });
+                      },
+                      beforeTextPaste: (text) {
+                        print("Allowing to paste $text");
+                        //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
+                        //but you can show anything you want here, like your pop up saying wrong paste format or etc
+                        return true;
+                      },
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.05,
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.1,
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.07,
+                      width: MediaQuery.of(context).size.width * 0.95,
+                      child: RaisedButton(
+                        color: _continueEnble
+                            ? Colors.redAccent[700]
+                            : Colors.grey,
+                        onPressed: () =>
+                            _continueEnble ? SmsValidator(currentText) : null,
+                        child: _isLoading
+                            ? CircularProgressIndicator()
+                            : Text(
+                                'Continue',
+                                style: TextStyle(
+                                    fontSize: 30.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                              ),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25.0)),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ),
+            )
+          ]),
         ));
   }
 }

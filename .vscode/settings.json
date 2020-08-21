@@ -3,5 +3,6 @@
     "python.pythonPath": "e:\\python.exe",
  
     "dart.sdkPath": "E:\\software\\flutter\\bin\\cache\\dart-sdk\\bin",
+    "git.ignoreLimitWarning": true,
 
 }
