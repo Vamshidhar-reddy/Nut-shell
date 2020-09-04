@@ -30,24 +30,36 @@ class _IntroScreenState extends State<IntroScreen> {
     slides.add(
       new Slide(
           centerWidget: Center(
-              child: SvgPicture.asset("assets/images/INTRO1.svg",
-                  height: 350, width: 400, fit: BoxFit.contain)),
+              child: Image(
+            image: AssetImage('assets/images/INTRO1.png'),
+            fit: BoxFit.contain,
+            height: 350,
+            width: 400,
+          )),
           backgroundOpacity: 0.1,
           backgroundImage: 'assets/images/Slider1.png'),
     );
     slides.add(
       new Slide(
           centerWidget: Center(
-              child: SvgPicture.asset("assets/images/INTRO2.svg",
-                  height: 350, width: 400, fit: BoxFit.contain)),
+              child: Image(
+            image: AssetImage('assets/images/INTRO2.png'),
+            fit: BoxFit.contain,
+            height: 350,
+            width: 400,
+          )),
           backgroundOpacity: 0.1,
           backgroundImage: 'assets/images/Slider2.png'),
     );
     slides.add(
       new Slide(
           centerWidget: Center(
-              child: SvgPicture.asset("assets/images/INTRO3.svg",
-                  height: 350, width: 400, fit: BoxFit.contain)),
+              child: Image(
+            image: AssetImage('assets/images/INTRO3.png'),
+            fit: BoxFit.contain,
+            height: 350,
+            width: 400,
+          )),
           backgroundOpacity: 0.1,
           backgroundImage: 'assets/images/Slider3.png'),
     );
@@ -91,7 +103,11 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                Image.asset('assets/images/google.png'),
+                Image(
+                  image: AssetImage('assets/images/google.png'),
+                  height: 55,
+                  width: 55,
+                ),
                 Text(
                   'Signin with Google',
                   style: TextStyle(
@@ -109,39 +125,47 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget _buildSocialBtn() {
-    return Center(
-      child: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.07,
-        width: MediaQuery.of(context).size.width * 0.95,
-        child: RaisedButton(
-          color: Colors.white,
-          onPressed: () {
-            // print("clicked 1");
-            Navigator.of(context).push(new MaterialPageRoute(
-                builder: (BuildContext context) => new Phone()));
-          },
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              Text(
-                'Login with Phone',
-                style: TextStyle(
-                    fontSize: 28.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                    color: Colors.grey,
-                    borderRadius: BorderRadius.circular(15.0)),
-                child: Icon(
-                  Icons.navigate_next,
-                  size: 30.0,
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.079,
+      width: MediaQuery.of(context).size.width * 0.975,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+        color: mainColor,
+      ),
+      child: Center(
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height * 0.07,
+          width: MediaQuery.of(context).size.width * 0.95,
+          child: RaisedButton(
+            color: Colors.white,
+            onPressed: () {
+              // print("clicked 1");
+              Navigator.of(context).push(new MaterialPageRoute(
+                  builder: (BuildContext context) => new Phone()));
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                Text(
+                  'Login with Phone',
+                  style: TextStyle(
+                      fontSize: 28.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey),
                 ),
-              )
-            ],
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.circular(15.0)),
+                  child: Icon(
+                    Icons.navigate_next,
+                    size: 30.0,
+                  ),
+                )
+              ],
+            ),
+            shape: border,
           ),
-          shape: border,
         ),
       ),
     );
@@ -166,7 +190,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: SingleChildScrollView(
                 physics: AlwaysScrollableScrollPhysics(),
                 padding: EdgeInsets.symmetric(
-                  horizontal: 40.0,
+                  horizontal: 10.0,
                   vertical: 60.0,
                 ),
                 child: Column(

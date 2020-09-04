@@ -584,6 +584,7 @@ class _PinCodeState extends State<PinCode> {
                             },
                             keyboardType: TextInputType.phone,
                             decoration: InputDecoration(
+                                counterText: '  ',
                                 hintText: pinCode != null ? pinCode : "",
                                 labelText: pinCode == null
                                     ? ' Pincode of your location'

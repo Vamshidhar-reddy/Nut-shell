@@ -61,6 +61,9 @@ class _NewsState extends State<News> {
                   child: Padding(
                     padding: EdgeInsets.only(top: 25.0),
                     child: new PageView.builder(
+                        // physics: ,
+                        controller: PageController(
+                            initialPage: 0, viewportFraction: 0.95),
                         scrollDirection: Axis.vertical,
                         itemCount: posts.length,
                         itemBuilder: (_, index) {

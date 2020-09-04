@@ -339,6 +339,7 @@ class _OtpState extends State<Otp> with TickerProviderStateMixin {
           child: ListView(children: [
             SingleChildScrollView(
               child: Container(
+                height: MediaQuery.of(context).size.height * 1,
                 decoration: BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage('assets/images/details.png'))),
@@ -400,6 +401,7 @@ class _OtpState extends State<Otp> with TickerProviderStateMixin {
                       ),
                     ),
                     PinCodeTextField(
+                      backgroundColor: Colors.transparent,
                       enabled: _pinEnable,
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       length: 6,
