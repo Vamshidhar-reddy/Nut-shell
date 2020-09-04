@@ -34,13 +34,13 @@ class _HelpState extends State<Help> {
           child: Padding(
             padding: const EdgeInsets.only(top: 28.0, left: 5),
             child: Column(children: <Widget>[
-              ListTile(
-                title: new Text('Terms and Conditions'),
-                leading: new Icon(Icons.assignment),
-                onTap: () {
-                  Navigator.pushNamed(context, "/termsandconditions");
-                },
-              ),
+              // ListTile(
+              //   title: new Text('Terms and Conditions'),
+              //   leading: new Icon(Icons.assignment),
+              //   onTap: () {
+              //     Navigator.pushNamed(context, "/termsandconditions");
+              //   },
+              // ),
               ListTile(
                 title: new Text('Privacy Policy'),
                 leading: new Icon(Icons.description),

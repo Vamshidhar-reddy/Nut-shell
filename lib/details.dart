@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:nutshell/orderConfirmation.dart';
 import 'package:nutshell/users.dart';
 import './paperback.dart';
@@ -51,7 +52,8 @@ class _DetailsState extends State<Details> {
                   ),
                   Center(
                     child: SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.15,
+                      height: MediaQuery.of(context).size.height * 0.1,
+                      width: MediaQuery.of(context).size.width * 0.6,
                       child: Image(
                         fit: BoxFit.fill,
                         image: mainLogo,
@@ -156,7 +158,8 @@ class _EmailState extends State<Email> {
                 ),
                 Center(
                   child: SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.15,
+                    height: MediaQuery.of(context).size.height * 0.1,
+                    width: MediaQuery.of(context).size.width * 0.6,
                     child: Image(
                       image: mainLogo,
                       fit: BoxFit.fill,
@@ -191,7 +194,7 @@ class _EmailState extends State<Email> {
                       Future.delayed(Duration.zero).then((_) {
                         setState(() {
                           btn_enable = true;
-                          global.emailOrNumVal = txt;
+                          global.email = txt;
                         });
                       });
                     } else {
@@ -276,7 +279,8 @@ class _BirthDayState extends State<BirthDay> {
                 ),
                 Center(
                   child: SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.15,
+                    height: MediaQuery.of(context).size.height * 0.1,
+                    width: MediaQuery.of(context).size.width * 0.6,
                     child: Image(
                       fit: BoxFit.fill,
                       image: mainLogo,
@@ -397,7 +401,8 @@ class _InstutionState extends State<Instution> {
                 ),
                 Center(
                   child: SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.15,
+                    height: MediaQuery.of(context).size.height * 0.1,
+                    width: MediaQuery.of(context).size.width * 0.6,
                     child: Image(
                       fit: BoxFit.fill,
                       image: mainLogo,
@@ -504,6 +509,7 @@ class _PinCodeState extends State<PinCode> {
       print(placemark[0].postalCode);
       setState(() {
         pinCode = placemark[0].postalCode;
+        global.pincode = pinCode;
         btn_enable = true;
         _isLoading = false;
       });
@@ -529,7 +535,8 @@ class _PinCodeState extends State<PinCode> {
                 ),
                 Center(
                   child: SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.15,
+                    height: MediaQuery.of(context).size.height * 0.1,
+                    width: MediaQuery.of(context).size.width * 0.6,
                     child: Image(
                       fit: BoxFit.fill,
                       image: mainLogo,
@@ -556,9 +563,11 @@ class _PinCodeState extends State<PinCode> {
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.75,
                         child: TextFormField(
-                            autovalidate: true,
-                            validator: (String txt) {
-                              if (txt.length >= 6) {
+                            // autovalidate: true,
+                            maxLength: 6,
+                            maxLengthEnforced: true,
+                            onChanged: (String txt) {
+                              if (txt.length == 6) {
                                 Future.delayed(Duration.zero).then((_) {
                                   setState(() {
                                     btn_enable = true;
@@ -575,7 +584,7 @@ class _PinCodeState extends State<PinCode> {
                             },
                             keyboardType: TextInputType.phone,
                             decoration: InputDecoration(
-                                hintText: pinCode == null ? pinCode : "",
+                                hintText: pinCode != null ? pinCode : "",
                                 labelText: pinCode == null
                                     ? ' Pincode of your location'
                                     : pinCode),
@@ -639,6 +648,7 @@ class _PinCodeState extends State<PinCode> {
                       onPressed: btn_enable == true
                           ? () {
                               print("clik");
+
                               Navigator.pushNamed(context, "/group");
                             }
                           : null),
@@ -656,6 +666,21 @@ class GroupScreen extends StatefulWidget {
 }
 
 class _GroupScreenState extends State<GroupScreen> {
+  @override
+  void initState() {
+    super.initState();
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await precachePicture(
+          ExactAssetPicture(
+              SvgPicture.svgStringDecoder, 'assets/images/GroupA.svg'),
+          context);
+      await precachePicture(
+          ExactAssetPicture(
+              SvgPicture.svgStringDecoder, 'assets/images/GroupB.svg'),
+          context);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -678,6 +703,7 @@ class _GroupScreenState extends State<GroupScreen> {
                 Center(
                   child: SizedBox(
                     height: MediaQuery.of(context).size.height * 0.1,
+                    width: MediaQuery.of(context).size.width * 0.6,
                     child: Image(
                       fit: BoxFit.fill,
                       image: mainLogo,

@@ -32,6 +32,7 @@ class _IntroScreenState extends State<IntroScreen> {
           centerWidget: Center(
               child: SvgPicture.asset("assets/images/INTRO1.svg",
                   height: 350, width: 400, fit: BoxFit.contain)),
+          backgroundOpacity: 0.1,
           backgroundImage: 'assets/images/Slider1.png'),
     );
     slides.add(
@@ -39,6 +40,7 @@ class _IntroScreenState extends State<IntroScreen> {
           centerWidget: Center(
               child: SvgPicture.asset("assets/images/INTRO2.svg",
                   height: 350, width: 400, fit: BoxFit.contain)),
+          backgroundOpacity: 0.1,
           backgroundImage: 'assets/images/Slider2.png'),
     );
     slides.add(
@@ -46,6 +48,7 @@ class _IntroScreenState extends State<IntroScreen> {
           centerWidget: Center(
               child: SvgPicture.asset("assets/images/INTRO3.svg",
                   height: 350, width: 400, fit: BoxFit.contain)),
+          backgroundOpacity: 0.1,
           backgroundImage: 'assets/images/Slider3.png'),
     );
   }
@@ -123,14 +126,19 @@ class _LoginScreenState extends State<LoginScreen> {
               Text(
                 'Login with Phone',
                 style: TextStyle(
-                    fontSize: 30.0,
+                    fontSize: 28.0,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black),
+                    color: Colors.grey),
               ),
-              Icon(
-                Icons.navigate_next,
-                size: 30.0,
-              ),
+              Container(
+                decoration: BoxDecoration(
+                    color: Colors.grey,
+                    borderRadius: BorderRadius.circular(15.0)),
+                child: Icon(
+                  Icons.navigate_next,
+                  size: 30.0,
+                ),
+              )
             ],
           ),
           shape: border,
@@ -184,7 +192,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.015,
                     ),
-                    Text('Login',
+                    Text('LOGIN',
                         style: TextStyle(
                             color: mainColor,
                             fontSize: headings,

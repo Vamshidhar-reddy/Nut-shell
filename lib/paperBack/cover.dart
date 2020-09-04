@@ -12,7 +12,7 @@ class Cover extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _current = Provider.of<UserDetails>(context).currentIndex;
-    final topic = Provider.of<UserDetails>(context).topicL;
+    final topic = Provider.of<UserDetails>(context).topicDoc;
     return Scaffold(
         appBar: AppBar(
             backgroundColor: Colors.white,
@@ -26,8 +26,10 @@ class Cover extends StatelessWidget {
             leading: IconButton(
                 icon: Icon(Icons.arrow_back),
                 color: Colors.black,
-                onPressed: () => Navigator.pushReplacement(
-                    context, MaterialPageRoute(builder: (context) => Topic()))),
+                onPressed: () => Navigator.pop(context)
+                // Navigator.pushReplacement(
+                //     context, MaterialPageRoute(builder: (context) => Topic()))
+                ),
             actions: <Widget>[
               Padding(
                 padding: const EdgeInsets.only(right: 15.0),
@@ -36,13 +38,13 @@ class Cover extends StatelessWidget {
                   // value: "a",
                   items: topic.map((v) {
                     return new DropdownMenuItem<String>(
-                      value: v.key.split('??')[1],
-                      child: new Text(v.key.split('??')[1]),
+                      value: v.data["title"],
+                      child: new Text(v.data["title"]),
                     );
                   }).toList(),
-                  onChanged: (value) => Provider.of<UserDetails>(context)
-                      .topicTap(topic
-                          .indexWhere((e) => e.key.split("??")[1] == value)),
+                  onChanged: (value) =>
+                      Provider.of<UserDetails>(context, listen: false).topicTap(
+                          topic.indexWhere((e) => e.data["title"] == value)),
                 ),
               )
               // ),
@@ -53,7 +55,7 @@ class Cover extends StatelessWidget {
               CarouselSlider(
                 carouselController: _controller,
                 options: CarouselOptions(
-                  carouselController: _controller,
+                  // carouselController: _controller,
                   enableInfiniteScroll: false,
                   height: MediaQuery.of(context).size.height * 0.9,
                   viewportFraction: 1.0,
@@ -66,7 +68,7 @@ class Cover extends StatelessWidget {
                   autoPlay: false,
                   pauseAutoPlayOnTouch: true,
                 ),
-                items: topic[ind.topicIndex].value.map<Widget>((c) {
+                items: topic[ind.topicIndex].data["Cover"].map<Widget>((c) {
                   return Builder(builder: (BuildContext context) {
                     return Container(
                       margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
@@ -77,6 +79,28 @@ class Cover extends StatelessWidget {
                             imageUrl: c,
                             placeholder: (context, url) =>
                                 Center(child: CircularProgressIndicator()),
+                            errorWidget: (context, u, d) {
+                           return   Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: <Widget>[
+                                    Text(
+                                      "Comming",
+                                      style: TextStyle(
+                                          fontFamily: "Montserrat",
+                                          fontSize: 25),
+                                    ),
+                                    Text(
+                                      "Soon",
+                                      style: TextStyle(
+                                          fontFamily: "Montserrat",
+                                          fontSize: 25),
+                                    )
+                                  ],
+                                ),
+                              );
+                            },
                           )),
                     );
                   });
@@ -110,8 +134,9 @@ class Cover extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children:
-                        ind.topicL[ind.topicIndex].value.map<Widget>((url) {
-                      int index = ind.topicL[ind.topicIndex].value.indexOf(url);
+                        topic[ind.topicIndex].data["Cover"].map<Widget>((url) {
+                      int index =
+                          topic[ind.topicIndex].data["Cover"].indexOf(url);
                       return Container(
                         width: 8.0,
                         height: 8.0,

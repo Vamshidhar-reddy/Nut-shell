@@ -108,11 +108,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           icon: Icon(
             Icons.arrow_back,
             size: 30.0,
-            color: mainColor,
+            color: Colors.black,
           ),
           tooltip: 'back',
           onPressed: () {
-            Navigator.pushNamed(context, "/account");
+            Navigator.pop(context);
           },
         ),
       ),
@@ -136,7 +136,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     bool selected = false;
     return ListView(children: <Widget>[
       Container(
-        padding: EdgeInsets.only(left: 25.0),
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("assets/images/details.png"),
+                fit: BoxFit.cover)),
+        padding: EdgeInsets.only(left: 25.0, right: 25),
         child:
             // Text("\n"),
             Column(
@@ -145,95 +149,84 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           children: <Widget>[
             SizedBox(height: MediaQuery.of(context).size.height * 0.1),
             SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.85,
-              child: TextFormField(
-                  autofocus: false,
-                  controller: _fnamecontroller,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                      // floatingLabelBehavior: FloatingLabelBehavior.always,
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15.0)),
-                      // hintText: _currentUser.fname.toString(),
-                      labelText: 'First Name'
-                      // hintText: _currentUser.fname.toString()
-                      ),
-                  validator: validateName,
-                  onSaved: (String value) {
-                    _currentUser.fname = value;
-                  }),
-            ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.05),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.85,
-              child: TextFormField(
-                  controller: _schoolcontroller,
-                  // autovalidate: true,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.0)),
-                    labelText: 'School',
-                    // hintText: _currentUser.school.toString()
-                  ),
-                  validator: validateName,
-                  onSaved: (String value) {
-                    _currentUser.school = value;
-                  }),
-            ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.05),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.85,
-              child: TextFormField(
-                  controller: _emailcontroller,
-                  decoration: InputDecoration(
-                      // floatingLabelBehavior: FloatingLabelBehavior.always,
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15.0)),
-                      // hintText: _currentUser.email.toString(),
-                      labelText: 'Email'
-                      // hintText:
-                      ),
-                  // validator: validateClass,
-                  onSaved: (String value) {
-                    _currentUser.email = value;
-                  }),
-            ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.05),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.85,
-              child: TextFormField(
-                  maxLength: 10,
-                  controller: _phonecontroller,
-                  autovalidate: true,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
+            TextFormField(
+                autofocus: false,
+                controller: _fnamecontroller,
+                keyboardType: TextInputType.text,
+                decoration: InputDecoration(
                     // floatingLabelBehavior: FloatingLabelBehavior.always,
-                    counterText: "",
-                    // hintText: _currentUser.phone.toString(),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.0)),
-                    labelText: 'Phone No',
-                  ),
-                  validator: (String txt) {
-                    if (txt.length == 10) {
-                      Future.delayed(Duration.zero).then((_) {
-                        setState(() {
-                          enable_btn = true;
-                        });
-                      });
-                    } else {
-                      enable_btn = false;
-                    }
-                  },
-                  onSaved: (String value) {
-                    _currentUser.phone = value;
-                  }),
-            ),
+                    // hintText: _currentUser.fname.toString(),
+                    labelText: 'First Name'
+                    // hintText: _currentUser.fname.toString()
+                    ),
+                validator: validateName,
+                onSaved: (String value) {
+                  _currentUser.fname = value;
+                }),
             SizedBox(height: MediaQuery.of(context).size.height * 0.05),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.85,
+            TextFormField(
+                controller: _schoolcontroller,
+                // autovalidate: true,
+                keyboardType: TextInputType.text,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0)),
+                  labelText: 'School',
+                  // hintText: _currentUser.school.toString()
+                ),
+                validator: validateName,
+                onSaved: (String value) {
+                  _currentUser.school = value;
+                }),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+            TextFormField(
+                controller: _emailcontroller,
+                decoration: InputDecoration(
+                    // floatingLabelBehavior: FloatingLabelBehavior.always,
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15.0)),
+                    // hintText: _currentUser.email.toString(),
+                    labelText: 'Email'
+                    // hintText:
+                    ),
+                // validator: validateClass,
+                onSaved: (String value) {
+                  _currentUser.email = value;
+                }),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+            TextFormField(
+                maxLength: 10,
+                controller: _phonecontroller,
+                autovalidate: true,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  // floatingLabelBehavior: FloatingLabelBehavior.always,
+                  counterText: "",
+                  // hintText: _currentUser.phone.toString(),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15.0)),
+                  labelText: 'Phone No',
+                ),
+                validator: (String txt) {
+                  if (txt.length == 10) {
+                    Future.delayed(Duration.zero).then((_) {
+                      setState(() {
+                        enable_btn = true;
+                      });
+                    });
+                  } else {
+                    enable_btn = false;
+                  }
+                },
+                onSaved: (String value) {
+                  _currentUser.phone = value;
+                }),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.25),
+            Container(
+              margin: EdgeInsets.fromLTRB(25, 10, 25, 0),
+              // width: MediaQuery.of(context).size.width * 0.85,
               child: RaisedButton(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0)),

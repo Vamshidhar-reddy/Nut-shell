@@ -14,6 +14,13 @@ class UserDetails extends ChangeNotifier {
     notifyListeners();
   }
 
+  List<DocumentSnapshot> _topicDoc;
+  List<DocumentSnapshot> get topicDoc => _topicDoc;
+  void topicDocs(List<DocumentSnapshot> ds) {
+    _topicDoc = ds;
+    notifyListeners();
+  }
+
   QuerySnapshot _q;
   List<MapEntry<String, dynamic>> _topicList;
   List<MapEntry<String, dynamic>> get topicL => _topicList;
@@ -26,6 +33,7 @@ class UserDetails extends ChangeNotifier {
 
   void onGrpTap(String grp) {
     _grpName = grp;
+    notifyListeners();
   }
 
   setnoOfPaper(String plan) {

@@ -98,6 +98,7 @@ class _OtpState extends State<Otp> with TickerProviderStateMixin {
           timeInSecForIosWeb: 3,
           msg: "Please enter a valid phone number",
         );
+
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => Phone()));
 
@@ -130,7 +131,7 @@ class _OtpState extends State<Otp> with TickerProviderStateMixin {
           print(value.user.uid);
           print("firest uset");
           OurDatabase().createUser();
-
+          g.phone = widget.PhoneNo;
           return Navigator.pushNamed(context, '/subs');
         }
         setState(() {
@@ -145,8 +146,10 @@ class _OtpState extends State<Otp> with TickerProviderStateMixin {
           if (user != null) {
             DocumentSnapshot _docSnap =
                 await _firestore.collection("users").document(user.uid).get();
+            print("inside before if subs");
+            if (_docSnap?.data['subscription'] ?? false) {
+              print("inside before if subs");
 
-            if (_docSnap.data['subscription']) {
               Provider.of<UserDetails>(context, listen: false)
                   .setnoOfPaper(_docSnap.data['subPlan']);
 
@@ -158,17 +161,22 @@ class _OtpState extends State<Otp> with TickerProviderStateMixin {
                   .getDocuments();
               print("doc");
               Provider.of<UserDetails>(context, listen: false).setQuery(qs);
+              g.phone = widget.PhoneNo;
 
               Navigator.pushNamedAndRemoveUntil(
                   context, "/bottombar", (_) => false);
             } else {
               g.isGLogin = false;
+              g.phone = widget.PhoneNo;
+
               Navigator.pushNamed(context, "/subs");
             }
           } else {
             setState(() {
               _isLoading = false;
             });
+            g.phone = widget.PhoneNo;
+
             Navigator.pushNamedAndRemoveUntil(context, "/intro", (_) => false);
           }
         } catch (e) {
@@ -233,6 +241,7 @@ class _OtpState extends State<Otp> with TickerProviderStateMixin {
       if (user.additionalUserInfo.isNewUser) {
         print(user.user.uid);
         OurDatabase().createUser();
+        g.phone = widget.PhoneNo;
 
         return Navigator.pushNamed(context, '/subs');
       }
@@ -253,7 +262,7 @@ class _OtpState extends State<Otp> with TickerProviderStateMixin {
               await _firestore.collection("users").document(user.uid).get();
 
           // await new Future.delayed(const Duration(milliseconds: 5000));
-          if (_docSnap.data['subscription']) {
+          if (_docSnap?.data['subscription'] ?? false) {
             setState(() {
               _isLoading = false;
             });
@@ -263,12 +272,16 @@ class _OtpState extends State<Otp> with TickerProviderStateMixin {
             setState(() {
               _isLoading = false;
             });
+            g.phone = widget.PhoneNo;
+
             Navigator.pushNamed(context, "/subs");
           }
         } else {
           setState(() {
             _isLoading = false;
           });
+          g.phone = widget.PhoneNo;
+
           Navigator.pushNamedAndRemoveUntil(context, "/intro", (_) => false);
         }
       } catch (e) {
@@ -326,18 +339,20 @@ class _OtpState extends State<Otp> with TickerProviderStateMixin {
           child: ListView(children: [
             SingleChildScrollView(
               child: Container(
-                padding: EdgeInsets.only(
-                    left: 20.0, top: 20.0, right: 10.0, bottom: 15.0),
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage('assets/images/details.png'))),
+                padding: EdgeInsets.only(left: 20.0, right: 10.0, bottom: 15.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.1,
+                      height: MediaQuery.of(context).size.height * 0.04,
                     ),
                     Center(
                       child: SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.15,
+                        height: MediaQuery.of(context).size.height * 0.125,
                         child: Image(
                           fit: BoxFit.fill,
                           image: mainLogo,
@@ -345,7 +360,7 @@ class _OtpState extends State<Otp> with TickerProviderStateMixin {
                       ),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.05,
+                      height: MediaQuery.of(context).size.height * 0.04,
                     ),
                     Text(
                       'Verifying your mobile number',
@@ -409,13 +424,11 @@ class _OtpState extends State<Otp> with TickerProviderStateMixin {
                       },
                       validator: (v) {
                         if (v.length == 6) {
-                          setState(() {
-                            _isLoading = true;
-                          });
+                          _isLoading = true;
                           Future.delayed(Duration(seconds: 5));
-                          setState(() {
-                            _isLoading = false;
-                          });
+                          // setState(() {
+                          _isLoading = false;
+                          // });
 
                           _continueEnble = true;
                         } else {
@@ -424,10 +437,10 @@ class _OtpState extends State<Otp> with TickerProviderStateMixin {
                       },
                       onChanged: (value) {
                         print(value);
-
-                        setState(() {
+                        if (value.length == 6)
+                          // setState(() {
                           currentText = value;
-                        });
+                        // });
                       },
                       beforeTextPaste: (text) {
                         print("Allowing to paste $text");
@@ -452,7 +465,7 @@ class _OtpState extends State<Otp> with TickerProviderStateMixin {
                         child: _isLoading
                             ? CircularProgressIndicator()
                             : Text(
-                                'SUbmit',
+                                'Submit',
                                 style: TextStyle(
                                     fontSize: 30.0,
                                     fontWeight: FontWeight.bold,

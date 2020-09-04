@@ -27,7 +27,7 @@ Future<String> signInWithGoogle(BuildContext context) async {
   Users _user = Users();
 
   try {
-    print("trying jp to login with mail");
+    print("trying  to login with mail");
     GoogleSignInAccount _googleUser = await _googleSignIn.signIn();
     GoogleSignInAuthentication _googleAuth = await _googleUser.authentication;
     final AuthCredential credential = GoogleAuthProvider.getCredential(
@@ -37,7 +37,7 @@ Future<String> signInWithGoogle(BuildContext context) async {
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
     if (_authResult.additionalUserInfo.isNewUser) {
       print("new user");
-      _user.uid = _authResult.user.uid;   
+      _user.uid = _authResult.user.uid;
       // global.timecreate = DateTime.now();
       _user.email = _authResult.user.email;
       global.email = _authResult.user.email;
@@ -59,7 +59,7 @@ Future<String> signInWithGoogle(BuildContext context) async {
       DocumentSnapshot _docSnap =
           await _firestore.collection("users").document(user.uid).get();
 
-      if (_docSnap.data['subscription']) {
+      if (_docSnap.data['subscription'] ?? false) {
         print("Already subscribed");
         global.isGLogin = true;
         //changes

@@ -78,14 +78,23 @@ class _PhoneState extends State<Phone> {
         ),
         body: ListView(children: [
           Container(
+            height: MediaQuery.of(context).size.height * 1,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('assets/images/details.png'),
+                    fit: BoxFit.fill)),
             padding: EdgeInsets.only(left: 25.0, top: 10.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.1,
+                ),
                 Center(
                   child: SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.15,
+                    height: MediaQuery.of(context).size.height * 0.1,
+                    width: MediaQuery.of(context).size.width * 0.6,
                     child: Image(
                       fit: BoxFit.fill,
                       image: mainLogo,
@@ -98,7 +107,7 @@ class _PhoneState extends State<Phone> {
                 Text(
                   'My mobile number is',
                   style: TextStyle(
-                      fontSize: 55.0,
+                      fontSize: 35.0,
                       fontWeight: FontWeight.bold,
                       color: mainColor),
                 ),
@@ -138,7 +147,8 @@ class _PhoneState extends State<Phone> {
                         // border: OutlineInputBorder(
                         //     borderRadius: BorderRadius.circular(15.0)),
                         counterText: '',
-                        hintText: 'Your 10-digit mobile number'
+                        hintText: 'Your 10-digit mobile number',
+                        hintStyle: TextStyle(fontSize: 25)
                         // prefix: Text(
                         //   '+91\t',
                         //   style: TextStyle(

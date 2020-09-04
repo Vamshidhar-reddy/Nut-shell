@@ -59,7 +59,7 @@ class _NewsState extends State<News> {
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height,
                   child: Padding(
-                    padding: EdgeInsets.only(top: 20.0),
+                    padding: EdgeInsets.only(top: 25.0),
                     child: new PageView.builder(
                         scrollDirection: Axis.vertical,
                         itemCount: posts.length,
@@ -81,7 +81,8 @@ class _NewsState extends State<News> {
   Widget postsUi(String postImage, String title, String date, String time,
       String description, String category) {
     return new Container(
-        height: MediaQuery.of(context).size.height,
+        padding: EdgeInsets.only(top: 0.0, bottom: 0.0),
+        height: MediaQuery.of(context).size.height * 1.1,
         width: MediaQuery.of(context).size.width,
         color: Colors.white,
         child: Column(
@@ -164,12 +165,12 @@ class _NewsState extends State<News> {
               ),
             ),
             Spacer(),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Divider(
-                thickness: 3,
-              ),
-            )
+            // Align(
+            //   alignment: Alignment.bottomCenter,
+            //   child: Divider(
+            //     thickness: 3,
+            //   ),
+            // )
           ],
         ));
   }

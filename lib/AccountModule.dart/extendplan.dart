@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:nutshell/AccountModule.dart/extendorder.dart';
+import 'package:nutshell/ColorAndFonts/Colors.dart';
 
 import 'package:nutshell/users.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
@@ -37,154 +38,316 @@ Map pay = {0: payone, 1: paytwo, 2: paythree};
 class _ExtendState extends State<Extend> {
   var oneval = false;
   var twoval = false;
+  
 
+  //
   bool isVisible = false;
   bool isLoading = false;
   int svgIndex;
   var threeval = false;
   FirebaseAuth _auth = FirebaseAuth.instance;
-  static const List<String> svgNames = <String>[
-    // "assets/images/7Days.svg",
-    "assets/images/2Months.svg",
-    "assets/images/6Months.svg",
-    "assets/images/1Year.svg",
+   static const List<int> price = [
+    // 0,
+    129,
+    219,
+    299,
   ];
+  static const Map<String, List<String>> subName = {
+    // "Trial": [
+    //   "7 Days trial",
+    //   "2 FREE issues of Nutshell",
+    //   " Digital Paperback",
+    // ],
+    "Basic": [
+      "2 Digital Paperbacks ",
+      "2 Issues of Nutshell Digital Paperback",
+      "(Published once every two months)",
+      "Plus",
+      "2 FREE Digital Paperbacks",
+    ],
+    "Standard": [
+      "4 Digital Paperbacks",
+      "4 Issues of Nutshell Digital Paperback",
+      "(Published once every two months)",
+      "Plus",
+      "2 FREE Digital Paperbacks",
+    ],
+    "Premium": [
+      "6 Digital Paperbacks ",
+      "6 Issues of Nutshell Digital Paperback",
+      "(Published once every two months)",
+      "Plus",
+      "2 FREE Digital Paperbacks",
+    ]
+  };
+
+  int _activeInd;
   @override
   Widget build(BuildContext context) {
-    callSet(String sv) {
-      setState(() {
-        isVisible == true && svgIndex != svgNames.indexOf(sv)
-            ? isVisible = true
-            : isVisible = !isVisible;
-        svgIndex = svgNames.indexOf(sv);
-      });
-    }
+    // callSet(String sv) {
+    //   setState(() {
+    //     isVisible == true && svgIndex != svgNames.indexOf(sv)
+    //         ? isVisible = true
+    //         : isVisible = !isVisible;
+    //     svgIndex = svgNames.indexOf(sv);
+    //   });
+    // }
 
-    return WillPopScope(
-        // onWillPop: () {
-        //   Navigator.pop(contexts);
-        // },
-        child: Scaffold(
-            backgroundColor: Colors.white,
-            body: ListView(
-              children: <Widget>[
-                SizedBox(height: MediaQuery.of(context).size.height * 0.05),
-                Text(
-                  "Pick your subscription plan",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 45.0, fontWeight: FontWeight.bold),
+    return Scaffold(
+        backgroundColor: Colors.white,
+        body: Column(
+          children: <Widget>[
+            SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+            Center(
+              child: Container(
+                margin: EdgeInsets.fromLTRB(30, 15, 30, 10),
+                child: Image(
+                  fit: BoxFit.fill,
+                  image: mainLogo,
                 ),
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.65,
-                  width: MediaQuery.of(context).size.width * 1.4,
-                  child: CarouselSlider(
-                      options: CarouselOptions(
-                        aspectRatio: 8 / 25,
-                        autoPlay: false,
-                        enableInfiniteScroll: false,
+              ),
+            ),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+            Text(
+              "Select a subscription plan",
+              textAlign: TextAlign.center,
+              softWrap: true,
+              style: TextStyle(
+                  color: mainColor,
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.05),
 
-                        // height: 2000,
-                        // width: MediaQuery.of(context).size.height * 0.90,
-                      ),
-                      items: svgNames.map((sv) {
-                        return Builder(
-                          builder: (BuildContext context) {
-                            return GestureDetector(
-                                onTap: () {
-                                  callSet(sv);
-                                },
-                                child: Stack(
-                                  children: <Widget>[
-                                    Align(
-                                      child: SvgPicture.asset(
-                                        "$sv",
-                                      ),
-                                    ),
-                                    Visibility(
-                                        visible: isVisible
-                                            ? svgNames.indexOf(sv) == svgIndex
-                                                ? true
-                                                : false
-                                            : false,
-                                        child: Positioned(
-                                          left: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.32,
-                                          top: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.05,
-                                          child: Icon(
-                                            Icons.check_circle,
-                                            color:
-                                                Color.fromRGBO(191, 30, 46, 1),
-                                            size: 60,
+            Expanded(
+              child: new ListView.builder(
+                  itemCount: price.length,
+                  itemBuilder: (BuildContext context, int i) {
+                    return Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(40.0),
+                        child: Theme(
+                          data: Theme.of(context).copyWith(
+                            cardColor: mainColor,
+                          ),
+                          child: new ExpansionPanelList(
+                            expansionCallback: (int index, bool status) {
+                              setState(() {
+                                _activeInd = _activeInd == i ? null : i;
+                              });
+                            },
+                            children: [
+                              new ExpansionPanel(
+                                  isExpanded: _activeInd == i,
+                                  headerBuilder: (BuildContext context,
+                                          bool isExpanded) =>
+                                      new Container(
+                                          margin: EdgeInsets.fromLTRB(
+                                              10, 22, 0, 25),
+                                          decoration: BoxDecoration(
+                                            color: mainColor,
+                                            borderRadius:
+                                                BorderRadius.circular(40.0),
                                           ),
-                                        ))
-                                  ],
-                                ));
-                          },
-                        );
-                      }).toList()),
-                ),
-                Container(
-                  padding: EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width * 0.4,
-                      right: 10.0,
-                      bottom: 10),
-                  // child: Visibility(
-                  // visible: isVisible,
-                  child: RaisedButton(
-                    padding: EdgeInsets.only(
-                        left: 22.0, right: 20.0, top: 10.0, bottom: 10.0),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25.0)),
-                    onPressed: isVisible == true
-                        ? () {
-                            setState(() {
-                              global.subPlan = en.values[svgIndex].toString();
-                              print("index of svg $svgIndex");
-                              switch (svgIndex) {
-                                case 0:
-                                  {
-                                    payone = 1;
-                                    break;
-                                  }
+                                          padding:
+                                              const EdgeInsets.only(left: 20.0),
+                                          alignment: Alignment.centerLeft,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              new Text(subName.keys.toList()[i],
+                                                  style: TextStyle(
+                                                      fontSize: 25,
+                                                      color: Colors.white,
+                                                      fontFamily:
+                                                          "Montserret")),
+                                              new Text(
+                                                  "₹" + price[i].toString(),
+                                                  style: TextStyle(
+                                                    fontSize: 25,
+                                                    color: Colors.white,
+                                                  )),
+                                            ],
+                                          )),
+                                  body: Container(
+                                    width: double.infinity,
+                                    color: Color.fromRGBO(161, 236, 166, 1),
+                                    child: Column(
+                                      children: [
+                                        Builder(builder: (context) {
+                                          List<Widget> widList = [];
+                                          subName.values
+                                              .toList()[i]
+                                              .forEach((e) {
+                                            widList.add(Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 8.0, bottom: 2),
+                                              child: Text(e,
+                                                  key: ObjectKey(e),
+                                                  softWrap: true,
+                                                  style: TextStyle(
+                                                      fontFamily: "Montserret",
+                                                      fontSize: 20,
+                                                      color: Colors.black)),
+                                            ));
+                                          });
+                                          widList.add(Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: RaisedButton(
+                                              color: mainColor,
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          50.0)),
+                                              onPressed: () {
+                                                setState(() {
+                                                  payone = 0;
+                                                  paytwo = 0;
+                                                  paythree = 0;
+                                                  global.subPlan =
+                                                      en.values[i].toString();
+                                                  print("index of d sub $i");
+                                                  switch (i) {
+                                                    
+                                                    case 0:
+                                                      {
+                                                        print(i);
+                                                        payone = 1;
+                                                        break;
+                                                      }
 
-                                case 1:
-                                  {
-                                    paytwo = 1;
-                                    break;
-                                  }
-                                case 2:
-                                  {
-                                    paythree = 1;
-                                    break;
-                                  }
-                              }
-                            });
+                                                    case 1:
+                                                      {
+                                                        paytwo = 1;
+                                                        break;
+                                                      }
+                                                    case 2:
+                                                      {
+                                                        paythree = 1;
+                                                        break;
+                                                      }
+                                                  }
+                                                });
 
-                            print(pay.values.toList()[svgIndex].toString());
-                            Navigator.pushNamed(context, '/extendorder');
-                          }
-                        : null,
-                    disabledColor: Colors.grey,
-                    color: Color.fromRGBO(109, 0, 109, 1),
-                    child: Center(
-                      child: Text(
-                        'Continue',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24.0,
-                            fontWeight: FontWeight.bold),
+                                                print(pay.values
+                                                    .toList()[i]
+                                                    .toString());
+                                                Navigator.pushNamed(
+                                                    context,"/extendorder")
+                                                    ;
+                                              },
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(12.0),
+                                                child: Text("CONFIRM",
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            "Montserret",
+                                                        fontSize: 25,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        color: Colors.white)),
+                                              ),
+                                            ),
+                                          ));
+                                          return Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 5, bottom: 8.0),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: widList,
+                                            ),
+                                          );
+                                        }),
+                                      ],
+                                    ),
+                                  )
+                                  //     Builder(builder: (context) {
+                                  //   return ListView.builder(
+                                  //       itemCount: 4,
+                                  //       itemBuilder: (c, j) {
+                                  //         print(j.toString());
+                                  //         return Text(
+                                  //             subName.values.toList()[i][j],
+                                  //             key: ObjectKey(j));
+                                  //       });
+                                  // })
+                                  // ),
+                                  ),
+                            ],
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-              ],
-            )));
+                    );
+                  }),
+            ),
+            // Container(
+            //   padding: EdgeInsets.only(
+            //       left: MediaQuery.of(context).size.width * 0.4,
+            //       right: 10.0,
+            //       bottom: 10),
+
+            //   child: RaisedButton(
+            //     padding: EdgeInsets.only(
+            //         left: 22.0, right: 20.0, top: 10.0, bottom: 10.0),
+            //     shape: RoundedRectangleBorder(
+            //         borderRadius: BorderRadius.circular(25.0)),
+            //     onPressed: isVisible == true
+            //         ? () {
+            //             setState(() {
+            //               global.subPlan = en.values[svgIndex].toString();
+            //               print("index of svg $svgIndex");
+            //               switch (svgIndex) {
+            //                 case 0:
+            //                   {
+            //                     payfree = 1;
+            //                     break;
+            //                   }
+            //                 case 1:
+            //                   {
+            //                     payone = 1;
+            //                     break;
+            //                   }
+
+            //                 case 2:
+            //                   {
+            //                     paytwo = 1;
+            //                     break;
+            //                   }
+            //                 case 3:
+            //                   {
+            //                     paythree = 1;
+            //                     break;
+            //                   }
+            //               }
+            //             });
+
+            //             print(pay.values.toList()[svgIndex].toString());
+            //             Navigator.push(context,
+            //                 MaterialPageRoute(builder: (context) => Details()));
+            //           }
+            //         : null,
+            //     disabledColor: Colors.grey,
+            //     color: Color.fromRGBO(109, 0, 109, 1),
+            //     child: Center(
+            //       child: Text(
+            //         'Continue',
+            //         style:
+            //             TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+            //       ),
+            //     ),
+            //   ),
+            //   // ),
+            // )
+          ],
+        )
+        // )
+        );
   }
+
 
   @override
   void initState() {
@@ -268,7 +431,7 @@ void openCheckout(BuildContext context) async {
     razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
     razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
   } catch (e) {
-    print("catch block jp");
+    print("catch block ");
     debugPrint(e);
   }
 }
@@ -333,7 +496,7 @@ void openCheckoutthree(BuildContext context) async {
     razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
     razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
   } catch (e) {
-    print("catch block jp");
+    print("catch block ");
     debugPrint(e);
   }
 }
@@ -396,7 +559,7 @@ void openCheckoutyear(BuildContext context) async {
     razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
     razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
   } catch (e) {
-    print("catch block jp");
+    print("catch block ");
     debugPrint(e);
   }
 }
@@ -457,7 +620,7 @@ void openCheckoutweek(BuildContext context) async {
   try {
     print("Trying to go to razorpay");
   } catch (e) {
-    print("catch block jp");
+    print("catch block ");
     debugPrint(e);
   }
 }

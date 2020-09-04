@@ -20,14 +20,15 @@ class _PaperbacksState extends State<Paperbacks> {
   @override
   int count;
   List<DocumentSnapshot> paper = List<DocumentSnapshot>();
-  void refresh() async{
-          FirebaseUser user = await FirebaseAuth.instance.currentUser();
+  void refresh() async {
+    FirebaseUser user = await FirebaseAuth.instance.currentUser();
 
     final _firestore = Firestore.instance;
     DocumentSnapshot _docSnap =
         await _firestore.collection("users").document(user.uid).get();
 
     print(_docSnap.data['subPlan']);
+
     Provider.of<UserDetails>(context, listen: false)
         .setnoOfPaper(_docSnap.data['subPlan']);
     print(_docSnap.data['group']);
@@ -71,13 +72,17 @@ class _PaperbacksState extends State<Paperbacks> {
                       decoration: BoxDecoration(color: Colors.grey[300]),
                       child: GestureDetector(
                           child: CachedNetworkImage(
+                            height: MediaQuery.of(context).size.height * 0.6,
+                            width: MediaQuery.of(context).size.width,
                             imageUrl: back.data["img"],
                             placeholder: (context, url) =>
                                 Center(child: CircularProgressIndicator()),
+                            fit: BoxFit.fill,
                           ),
                           onTap: () {
                             Provider.of<UserDetails>(context, listen: false)
                                 .onPaperTap(back);
+                            print(back.documentID);
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(

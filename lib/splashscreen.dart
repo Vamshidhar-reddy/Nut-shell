@@ -46,21 +46,20 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
 
   Future existingUser() async {
     final Firestore _firestore = Firestore.instance;
-
     try {
       FirebaseUser user = await FirebaseAuth.instance.currentUser();
-      print(user.toString());
+      // print(user.uid.toString());
+      // Future.delayed(const Duration(milliseconds: 1400));
+      // Navigator.pushNamedAndRemoveUntil(context, '/intro', (_) => false);
 
       if (user != null) {
         try {
           DocumentSnapshot _docSnap =
               await _firestore.collection("users").document(user.uid).get();
 
-          if (_docSnap.data['subscription']) {
-            print(_docSnap.data['subPlan']);
+          if (_docSnap?.data['subscription'] ?? false) {
             Provider.of<UserDetails>(context, listen: false)
                 .setnoOfPaper(_docSnap.data['subPlan']);
-            print(_docSnap.data['group']);
 
             Provider.of<UserDetails>(context, listen: false)
                 .setnoOfPaper(_docSnap.data['group']);
@@ -131,6 +130,8 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
                   child: new Hero(
                       tag: 'logo',
                       child: new Image(
+                        height: MediaQuery.of(context).size.height * 1,
+                        width: MediaQuery.of(context).size.width * 1,
                         fit: BoxFit.fill,
                         image: new AssetImage('assets/images/Splash.png'),
                       )))),

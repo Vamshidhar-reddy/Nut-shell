@@ -62,7 +62,7 @@ class _AccountState extends State<Account> {
     String postUrl = PostUrl.toString();
     print("Post Url =" + postUrl);
     saveToDatabase(postUrl);
-    // var user = await FirebaseAuth.instance.currentUser();
+    // var user = await FirebaseAuth.instance.currentUser;
     await Firestore.instance
         .collection('users')
         .document(_currentUser.uid)
@@ -197,18 +197,12 @@ class _AccountState extends State<Account> {
           });
     }
 
-    // print("jp"+_currentUser.photoUrl.toString());
     return WillPopScope(
         onWillPop: () {
           Navigator.pushNamed(context, "/bottombar");
         },
         child: Scaffold(
             backgroundColor: Colors.white,
-
-            // bottomNavigationBar: bottomBar(context, 2),
-            // bottomNavigationBar: BottomBar(),
-
-            // bottomNavigationBar: PersistentNavBar(),
             appBar: new AppBar(
               leading: new IconButton(
                 icon: Icon(
@@ -237,7 +231,7 @@ class _AccountState extends State<Account> {
                         ))),
               ],
               // title: new Text("Account Details",style: TextStyle(color:Colors.black,fontSize: 30.0),),
-              backgroundColor: Color.fromRGBO(183, 227, 248, 1),
+              backgroundColor: Colors.white,
               elevation: 0.0,
             ),
             body: isLoading
@@ -247,7 +241,7 @@ class _AccountState extends State<Account> {
                 : Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage('assets/images/account.png'),
+                          image: AssetImage('assets/images/details.png'),
                           fit: BoxFit.fill),
                     ),
                     child: Column(
@@ -340,8 +334,20 @@ class _AccountState extends State<Account> {
                         SizedBox(
                             child: Column(children: <Widget>[
                           ListTile(
-                            title: new Text('Pricing Plan',
-                                style: TextStyle(fontWeight: FontWeight.bold)),
+                            title: new Text('About Us',
+                                style: TextStyle(
+                                    fontSize: 25.0,
+                                    fontWeight: FontWeight.bold)),
+                            leading: new Icon(Icons.chat_bubble_outline),
+                            onTap: () {
+                              Navigator.pushNamed(context, "/aboutUs");
+                            },
+                          ),
+                          ListTile(
+                            title: new Text('My Subscription',
+                                style: TextStyle(
+                                    fontSize: 25.0,
+                                    fontWeight: FontWeight.bold)),
                             leading: new Icon(Icons.account_balance_wallet),
                             onTap: () {
                               Navigator.pushNamed(context, "/pricing");
@@ -349,37 +355,48 @@ class _AccountState extends State<Account> {
                           ),
                           ListTile(
                             title: new Text('Contact Us',
-                                style: TextStyle(fontWeight: FontWeight.bold)),
+                                style: TextStyle(
+                                    fontSize: 25.0,
+                                    fontWeight: FontWeight.bold)),
                             leading: new Icon(Icons.call),
                             onTap: () {
                               Navigator.pushNamed(context, "/contact");
                             },
                           ),
                           ListTile(
-                            title: new Text('About Us',
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                            leading: new Icon(Icons.chat_bubble_outline),
+                            title: new Text('Terms and Conditions',
+                                style: TextStyle(
+                                    fontSize: 25.0,
+                                    fontWeight: FontWeight.bold)),
+                            leading: new Icon(Icons.assignment),
                             onTap: () {
-                              Navigator.pushNamed(context, "/aboutUs");
+                              Navigator.pushNamed(
+                                  context, "/termsandconditions");
                             },
                           ),
                           ListTile(
                             title: new Text('Help',
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                            leading: new Icon(Icons.assignment),
-                            subtitle: Text("Privacy, Refund, TnC"),
+                                style: TextStyle(
+                                    fontSize: 25.0,
+                                    fontWeight: FontWeight.bold)),
+                            leading: new Icon(
+                              Icons.help,
+                            ),
+                            // subtitle: Text(
+                            //   "Privacy, Refund, TnC",
+                            // ),
                             onTap: () {
                               Navigator.pushNamed(context, "/help");
                             },
                           ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.15,
+                          ),
                           ListTile(
-                            title: new Text(
-                              'Logout',
-                              style: TextStyle(
-                                  fontSize: 20.0, fontWeight: FontWeight.bold
-                                  // color:Colors.deepOrange
-                                  ),
-                            ),
+                            title: new Text('Logout',
+                                style: TextStyle(
+                                    fontSize: 25.0,
+                                    fontWeight: FontWeight.bold)),
                             leading: new Icon(
                               Icons.settings_power,
                             ),

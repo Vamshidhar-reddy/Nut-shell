@@ -41,7 +41,7 @@ class OurDatabase {
       print("called for data");
       DocumentSnapshot _docSnapshot =
           await _firestore.collection("users").document(uid).get();
-      print("waiting jp");
+      print("waiting ");
       print(retVal.fname = _docSnapshot.data["first Name"]);
       retVal.accountCreated = _docSnapshot.data["accountCreated"];
       retVal.expiryDate = _docSnapshot.data["expiryDate"];
@@ -61,7 +61,7 @@ class OurDatabase {
       retVal.subPlan = _docSnapshot.data["subPlan"];
       retVal.pinCode = _docSnapshot.data["pinCode"];
       // global.timeCreated = _docSnapshot.data["accountCreated"];
-      print("jp");
+      print("");
       print(retVal.accountCreated);
       print(retVal.expiryDate);
       // print(global.timeCreated.day.toString());
