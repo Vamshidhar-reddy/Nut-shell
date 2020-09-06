@@ -9,5 +9,6 @@ import android.view.WindowManager.LayoutParams
 class MainActivity: FlutterActivity() {
      override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
         GeneratedPluginRegistrant.registerWith(flutterEngine);
+        getWindow().addFlags(LayoutParams.FLAG_SECURE);
     }
 }

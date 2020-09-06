@@ -136,6 +136,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     bool selected = false;
     return ListView(children: <Widget>[
       Container(
+        height: MediaQuery.of(context).size.height * 1.0,
         decoration: BoxDecoration(
             image: DecorationImage(
                 image: AssetImage("assets/images/details.png"),
