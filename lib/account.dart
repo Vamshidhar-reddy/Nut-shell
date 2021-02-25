@@ -5,6 +5,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:nutshell/ColorAndFonts/Colors.dart';
 import 'package:nutshell/database.dart';
@@ -198,216 +199,223 @@ class _AccountState extends State<Account> {
     }
 
     return WillPopScope(
-        onWillPop: () {
-          Navigator.pushNamed(context, "/bottombar");
-        },
-        child: Scaffold(
-            backgroundColor: Colors.white,
-            appBar: new AppBar(
-              leading: new IconButton(
-                icon: Icon(
-                  Icons.arrow_back,
-                  size: 30.0,
-                  color: Colors.black,
-                ),
-                tooltip: 'back',
-                onPressed: () {
-                  Navigator.pushNamed(context, "/bottombar");
-                },
+      // onWillPop: () {
+      //   Navigator.pushNamed(context, "/bottombar");
+      // },
+      onWillPop: () => SystemNavigator.pop(),
+
+      child: Scaffold(
+          backgroundColor: Colors.white,
+          appBar: new AppBar(
+            leading: new IconButton(
+              icon: Icon(
+                Icons.arrow_back,
+                size: 30.0,
+                color: Colors.black,
               ),
-              // title: Text(
-              //   'Account',
-              //   style: TextStyle(color: Colors.black, fontSize: 30.0),
-              // ),
-              actions: <Widget>[
-                FlatButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, "/editprofile");
-                    },
-                    child: Text('Edit\nProfile',
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.w900,
-                        ))),
-              ],
-              // title: new Text("Account Details",style: TextStyle(color:Colors.black,fontSize: 30.0),),
-              backgroundColor: Colors.white,
-              elevation: 0.0,
+              tooltip: 'back',
+              onPressed: () {
+                Navigator.pushNamed(context, "/bottombar");
+              },
             ),
-            body: isLoading
-                ? Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage('assets/images/details.png'),
-                          fit: BoxFit.fill),
-                    ),
-                    child: Column(
-                      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            // title: Text(
+            //   'Account',
+            //   style: TextStyle(color: Colors.black, fontSize: 30.0),
+            // ),
+            actions: <Widget>[
+              FlatButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/editprofile");
+                  },
+                  child: Text('Edit\nProfile',
+                      style: TextStyle(
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.w900,
+                      ))),
+            ],
+            // title: new Text("Account Details",style: TextStyle(color:Colors.black,fontSize: 30.0),),
+            backgroundColor: Colors.white,
+            elevation: 0.0,
+          ),
+          body: isLoading
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage('assets/images/details.png'),
+                        fit: BoxFit.fill),
+                  ),
+                  // child: Column(
+                  //   // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  //   children: <Widget>[
+                  child: Column(children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: _currentUser.photoUrl == null
-                                  ? Icon(Icons.account_circle, size: 120.0)
-                                  : GestureDetector(
-                                      onTap: () => Alert(context),
-                                      child: isLoading == true
-                                          ? CircularProgressIndicator(
-                                              backgroundColor: Colors.white,
-                                            )
-                                          : CircleAvatar(
-                                              radius: 70,
-                                              backgroundColor: Colors.white,
-                                              backgroundImage: NetworkImage(
-                                                  _currentUser.photoUrl
-                                                      .toString()),
-                                            ),
-                                    ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 60.0),
-                              child: IconButton(
-                                  icon: Icon(
-                                    Icons.add_a_photo,
-                                    size: 30.0,
-                                  ),
-                                  onPressed: () => getImage()),
-                            ),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.10,
-                              width: MediaQuery.of(context).size.width * 0.40,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: _currentUser.photoUrl == null
+                              ? Icon(Icons.account_circle, size: 120.0)
+                              : GestureDetector(
+                                  onTap: () => Alert(context),
+                                  child: isLoading == true
+                                      ? CircularProgressIndicator(
+                                          backgroundColor: Colors.white,
+                                        )
+                                      : CircleAvatar(
+                                          radius: 70,
+                                          backgroundColor: Colors.white,
+                                          backgroundImage: NetworkImage(
+                                              _currentUser.photoUrl.toString()),
+                                        ),
+                                ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 60.0),
+                          child: IconButton(
+                              icon: Icon(
+                                Icons.add_a_photo,
+                                size: 30.0,
+                              ),
+                              onPressed: () => getImage()),
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.10,
+                          width: MediaQuery.of(context).size.width * 0.40,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: <Widget>[
-                                      Text(
-                                        _currentUser.fname.toString() + " ",
-                                        textAlign: TextAlign.end,
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 20.0,
-                                            fontFamily: 'Montserrat',
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                      Icon(
-                                        Icons.check_circle,
-                                        color: Colors.blue,
-                                        size: 20.0,
-                                      ),
-                                    ],
-                                  ),
-                                  Divider(
-                                    thickness: 3.0,
-                                    color: Colors.redAccent,
-                                    endIndent: 3.0,
-                                  ),
                                   Text(
-                                    "Group:\t\t" +
-                                        _currentUser.group.toString(),
+                                    _currentUser.fname.toString() + " ",
+                                    textAlign: TextAlign.end,
                                     style: TextStyle(
+                                        color: Colors.black,
                                         fontSize: 20.0,
                                         fontFamily: 'Montserrat',
                                         fontWeight: FontWeight.w500),
                                   ),
+                                  Icon(
+                                    Icons.check_circle,
+                                    color: Colors.blue,
+                                    size: 20.0,
+                                  ),
                                 ],
                               ),
-                            )
-                          ],
-                        ),
-                        Divider(
-                          height: 45,
-                          thickness: 2.0,
-                          color: mainColor,
-                        ),
-                        Container(
-                          padding: new EdgeInsets.all(5.0),
-                        ),
-                        SizedBox(
-                            child: Column(children: <Widget>[
-                          ListTile(
-                            title: new Text('About Us',
+                              Divider(
+                                thickness: 3.0,
+                                color: Colors.redAccent,
+                                endIndent: 3.0,
+                              ),
+                              Text(
+                                "Group:\t\t" + _currentUser.group.toString(),
                                 style: TextStyle(
-                                    fontSize: 25.0,
-                                    fontWeight: FontWeight.bold)),
-                            leading: new Icon(Icons.chat_bubble_outline),
-                            onTap: () {
-                              Navigator.pushNamed(context, "/aboutUs");
-                            },
+                                    fontSize: 20.0,
+                                    fontFamily: 'Montserrat',
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ],
                           ),
-                          ListTile(
-                            title: new Text('My Subscription',
-                                style: TextStyle(
-                                    fontSize: 25.0,
-                                    fontWeight: FontWeight.bold)),
-                            leading: new Icon(Icons.account_balance_wallet),
-                            onTap: () {
-                              Navigator.pushNamed(context, "/pricing");
-                            },
-                          ),
-                          ListTile(
-                            title: new Text('Contact Us',
-                                style: TextStyle(
-                                    fontSize: 25.0,
-                                    fontWeight: FontWeight.bold)),
-                            leading: new Icon(Icons.call),
-                            onTap: () {
-                              Navigator.pushNamed(context, "/contact");
-                            },
-                          ),
-                          ListTile(
-                            title: new Text('Terms and Conditions',
-                                style: TextStyle(
-                                    fontSize: 25.0,
-                                    fontWeight: FontWeight.bold)),
-                            leading: new Icon(Icons.assignment),
-                            onTap: () {
-                              Navigator.pushNamed(
-                                  context, "/termsandconditions");
-                            },
-                          ),
-                          ListTile(
-                            title: new Text('Help',
-                                style: TextStyle(
-                                    fontSize: 25.0,
-                                    fontWeight: FontWeight.bold)),
-                            leading: new Icon(
-                              Icons.help,
-                            ),
-                            // subtitle: Text(
-                            //   "Privacy, Refund, TnC",
-                            // ),
-                            onTap: () {
-                              Navigator.pushNamed(context, "/help");
-                            },
-                          ),
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.15,
-                          ),
-                          ListTile(
-                            title: new Text('Logout',
-                                style: TextStyle(
-                                    fontSize: 25.0,
-                                    fontWeight: FontWeight.bold)),
-                            leading: new Icon(
-                              Icons.settings_power,
-                            ),
-                            onTap: () {
-                              showAlertDialog(context);
-                            },
-                          ),
-                        ])),
+                        )
                       ],
                     ),
-                  )));
+                    Divider(
+                      height: 45,
+                      thickness: 2.0,
+                      color: mainColor,
+                    ),
+                    ListTile(
+                      title: new Text('ABOUT US',
+                          style: TextStyle(
+                              fontSize: 25.0,
+                              // fontWeight: FontWeight.bold,
+                              fontFamily: 'KGInimitableOriginal')),
+                      leading: new Icon(Icons.chat_bubble_outline),
+                      onTap: () {
+                        Navigator.pushNamed(context, "/aboutUs");
+                      },
+                    ),
+                    ListTile(
+                      title: new Text('MY SUBSCRIPTION',
+                          style: TextStyle(
+                              fontSize: 25.0,
+                              // fontWeight: FontWeight.bold,
+                              fontFamily: 'KGInimitableOriginal')),
+                      leading: new Icon(Icons.account_balance_wallet),
+                      onTap: () {
+                        Navigator.pushNamed(context, "/pricing");
+                      },
+                    ),
+                    ListTile(
+                      title: new Text('CONTACT US',
+                          style: TextStyle(
+                              fontSize: 25.0,
+                              // fontWeight: FontWeight.bold,
+                              fontFamily: 'KGInimitableOriginal')),
+                      leading: new Icon(Icons.call),
+                      onTap: () {
+                        Navigator.pushNamed(context, "/contact");
+                      },
+                    ),
+                    ListTile(
+                      title: new Text('TERMS AND CONDITIONS',
+                          style: TextStyle(
+                              fontSize: 25.0,
+                              // fontWeight: FontWeight.bold,
+                              fontFamily: 'KGInimitableOriginal')),
+                      leading: new Icon(Icons.assignment),
+                      onTap: () {
+                        Navigator.pushNamed(context, "/termsandconditions");
+                      },
+                    ),
+                    ListTile(
+                      title: new Text('HELP',
+                          style: TextStyle(
+                              fontSize: 25.0,
+                              // fontWeight: FontWeight.bold,
+                              fontFamily: 'KGInimitableOriginal')),
+                      leading: new Icon(
+                        Icons.help,
+                      ),
+                      // subtitle: Text(
+                      //   "Privacy, Refund, TnC",
+                      // ),
+                      onTap: () {
+                        Navigator.pushNamed(context, "/help");
+                      },
+                    ),
+                    Spacer(),
+                    // Expanded(
+                    //     child: SizedBox(
+                    //   height: MediaQuery.of(context).size.height * 0.25,
+                    // )),
+
+                    // SizedBox(
+                    //   height: MediaQuery.of(context).size.height * 0.25,
+                    // ),
+                    ListTile(
+                      title: new Text('LOGOUT',
+                          style: TextStyle(
+                              fontSize: 25.0,
+                              // fontWeight: FontWeight.bold,
+                              fontFamily: 'KGInimitableOriginal')),
+                      leading: new Icon(
+                        Icons.settings_power,
+                      ),
+                      onTap: () {
+                        showAlertDialog(context);
+                      },
+                    ),
+                  ]),
+                  //   ],
+                  // ),
+                )),
+    );
   }
 }
 

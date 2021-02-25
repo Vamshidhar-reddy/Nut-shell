@@ -38,7 +38,6 @@ Map pay = {0: payone, 1: paytwo, 2: paythree};
 class _ExtendState extends State<Extend> {
   var oneval = false;
   var twoval = false;
-  
 
   //
   bool isVisible = false;
@@ -46,7 +45,7 @@ class _ExtendState extends State<Extend> {
   int svgIndex;
   var threeval = false;
   FirebaseAuth _auth = FirebaseAuth.instance;
-   static const List<int> price = [
+  static const List<int> price = [
     // 0,
     129,
     219,
@@ -58,21 +57,21 @@ class _ExtendState extends State<Extend> {
     //   "2 FREE issues of Nutshell",
     //   " Digital Paperback",
     // ],
-    "Basic": [
+    "4 Month Plan": [
       "2 Digital Paperbacks ",
       "2 Issues of Nutshell Digital Paperback",
       "(Published once every two months)",
       "Plus",
       "2 FREE Digital Paperbacks",
     ],
-    "Standard": [
+    "6 Month Plan": [
       "4 Digital Paperbacks",
       "4 Issues of Nutshell Digital Paperback",
       "(Published once every two months)",
       "Plus",
       "2 FREE Digital Paperbacks",
     ],
-    "Premium": [
+    "12 Month Plan": [
       "6 Digital Paperbacks ",
       "6 Issues of Nutshell Digital Paperback",
       "(Published once every two months)",
@@ -139,6 +138,7 @@ class _ExtendState extends State<Extend> {
                             },
                             children: [
                               new ExpansionPanel(
+                                  canTapOnHeader: true,
                                   isExpanded: _activeInd == i,
                                   headerBuilder: (BuildContext context,
                                           bool isExpanded) =>
@@ -196,7 +196,7 @@ class _ExtendState extends State<Extend> {
                                           widList.add(Padding(
                                             padding: const EdgeInsets.all(8.0),
                                             child: RaisedButton(
-                                              color: mainColor,
+                                              color: Colors.white,
                                               shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(
@@ -210,7 +210,6 @@ class _ExtendState extends State<Extend> {
                                                       en.values[i].toString();
                                                   print("index of d sub $i");
                                                   switch (i) {
-                                                    
                                                     case 0:
                                                       {
                                                         print(i);
@@ -235,8 +234,7 @@ class _ExtendState extends State<Extend> {
                                                     .toList()[i]
                                                     .toString());
                                                 Navigator.pushNamed(
-                                                    context,"/extendorder")
-                                                    ;
+                                                    context, "/extendorder");
                                               },
                                               child: Padding(
                                                 padding:
@@ -248,7 +246,7 @@ class _ExtendState extends State<Extend> {
                                                         fontSize: 25,
                                                         fontWeight:
                                                             FontWeight.normal,
-                                                        color: Colors.white)),
+                                                        color: Colors.green)),
                                               ),
                                             ),
                                           ));
@@ -347,7 +345,6 @@ class _ExtendState extends State<Extend> {
         // )
         );
   }
-
 
   @override
   void initState() {

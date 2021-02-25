@@ -31,7 +31,7 @@ class _IntroScreenState extends State<IntroScreen> {
       new Slide(
           centerWidget: Center(
               child: Image(
-            image: AssetImage('assets/images/INTRO1.png'),
+            image: AssetImage('assets/images/intro1.png'),
             fit: BoxFit.contain,
             height: 350,
             width: 400,
@@ -43,7 +43,7 @@ class _IntroScreenState extends State<IntroScreen> {
       new Slide(
           centerWidget: Center(
               child: Image(
-            image: AssetImage('assets/images/INTRO2.png'),
+            image: AssetImage('assets/images/intro2.png'),
             fit: BoxFit.contain,
             height: 350,
             width: 400,
@@ -55,7 +55,7 @@ class _IntroScreenState extends State<IntroScreen> {
       new Slide(
           centerWidget: Center(
               child: Image(
-            image: AssetImage('assets/images/INTRO3.png'),
+            image: AssetImage('assets/images/intro3.png'),
             fit: BoxFit.contain,
             height: 350,
             width: 400,
@@ -94,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
       children: <Widget>[
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.07,
-          width: MediaQuery.of(context).size.width * 0.95,
+          width: MediaQuery.of(context).size.width * 0.90,
           child: RaisedButton(
             color: mainColor,
             onPressed: () {
@@ -109,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   width: 55,
                 ),
                 Text(
-                  'Signin with Google',
+                  'Sign in with Google',
                   style: TextStyle(
                       fontSize: 25.0,
                       fontWeight: FontWeight.bold,
@@ -126,8 +126,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _buildSocialBtn() {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.079,
-      width: MediaQuery.of(context).size.width * 0.975,
+      height: MediaQuery.of(context).size.height * 0.07,
+      width: MediaQuery.of(context).size.width * 0.90,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(15.0)),
         color: mainColor,
@@ -147,7 +147,7 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 Text(
-                  'Login with Phone',
+                  'Log in with Phone',
                   style: TextStyle(
                       fontSize: 28.0,
                       fontWeight: FontWeight.bold,
@@ -216,11 +216,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.015,
                     ),
-                    Text('LOGIN',
-                        style: TextStyle(
-                            color: mainColor,
-                            fontSize: headings,
-                            fontWeight: FontWeight.w900)),
+                    // Text('Signin/ Login',
+                    //     style: TextStyle(
+                    //         color: mainColor,
+                    //         fontSize: headings,
+                    //         fontWeight: FontWeight.w900)),
                     SizedBox(
                       height: 20,
                     ),

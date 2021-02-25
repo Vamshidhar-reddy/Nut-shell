@@ -331,13 +331,12 @@ class _OtpState extends State<Otp> with TickerProviderStateMixin {
         ),
         key: _scaffoldKey,
         body: WillPopScope(
-          onWillPop: () {
-            textEditingController.clear();
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Phone()));
-          },
-          child: ListView(children: [
-            SingleChildScrollView(
+            onWillPop: () {
+              textEditingController.clear();
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Phone()));
+            },
+            child: SingleChildScrollView(
               child: Container(
                 height: MediaQuery.of(context).size.height * 1,
                 decoration: BoxDecoration(
@@ -353,7 +352,7 @@ class _OtpState extends State<Otp> with TickerProviderStateMixin {
                     ),
                     Center(
                       child: SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.125,
+                        height: MediaQuery.of(context).size.height * 0.1,
                         child: Image(
                           fit: BoxFit.fill,
                           image: mainLogo,
@@ -364,22 +363,21 @@ class _OtpState extends State<Otp> with TickerProviderStateMixin {
                       height: MediaQuery.of(context).size.height * 0.04,
                     ),
                     Text(
-                      'Verifying your mobile number',
+                      'VERIFYING YOUR MOBILE NUMBER',
                       style: TextStyle(
-                          fontSize: headings,
+                          fontSize: MediaQuery.of(context).size.width * 0.07,
                           fontWeight: FontWeight.bold,
+                          fontFamily: 'KGInimitableOriginal',
                           color: mainColor),
                     ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.03,
-                    ),
+
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.1,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text(
-                            '0:30',
+                            '',
                             style: TextStyle(
                                 fontSize: 23,
                                 color:
@@ -454,34 +452,34 @@ class _OtpState extends State<Otp> with TickerProviderStateMixin {
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.05,
                     ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.1,
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.07,
-                      width: MediaQuery.of(context).size.width * 0.95,
-                      child: RaisedButton(
-                        color: _continueEnble ? mainColor : Colors.grey,
-                        onPressed: () =>
-                            _continueEnble ? SmsValidator(currentText) : null,
-                        child: _isLoading
-                            ? CircularProgressIndicator()
-                            : Text(
-                                'Submit',
-                                style: TextStyle(
-                                    fontSize: 30.0,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                              ),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0)),
+                    // SizedBox(
+                    //   height: MediaQuery.of(context).size.height * 0.1,
+                    // ),
+                    Center(
+                      child: SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.06,
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        child: RaisedButton(
+                          color: _continueEnble ? mainColor : Colors.grey,
+                          onPressed: () =>
+                              _continueEnble ? SmsValidator(currentText) : null,
+                          child: _isLoading
+                              ? CircularProgressIndicator()
+                              : Text(
+                                  'Submit',
+                                  style: TextStyle(
+                                      fontSize: 30.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
+                                ),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0)),
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
-            )
-          ]),
-        ));
+            )));
   }
 }

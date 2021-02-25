@@ -134,8 +134,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget FormUI() {
     _currentUser.sID = sID;
     bool selected = false;
-    return ListView(children: <Widget>[
-      Container(
+    return SingleChildScrollView(
+      child: Container(
         height: MediaQuery.of(context).size.height * 1.0,
         decoration: BoxDecoration(
             image: DecorationImage(
@@ -145,11 +145,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         child:
             // Text("\n"),
             Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             SizedBox(height: MediaQuery.of(context).size.height * 0.1),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.02),
             TextFormField(
                 autofocus: false,
                 controller: _fnamecontroller,
@@ -224,7 +223,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 onSaved: (String value) {
                   _currentUser.phone = value;
                 }),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.25),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
             Container(
               margin: EdgeInsets.fromLTRB(25, 10, 25, 0),
               // width: MediaQuery.of(context).size.width * 0.85,
@@ -249,7 +248,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           ],
         ),
       ),
-    ]);
+    );
   }
 
   sendToServer() async {

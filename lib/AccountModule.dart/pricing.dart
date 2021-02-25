@@ -128,9 +128,10 @@ class _PricingState extends State<Pricing> {
                         height: MediaQuery.of(context).size.height * 0.05,
                       ),
                       Text(
-                        "Your current \nplan",
+                        "Your current plan",
                         style: TextStyle(
-                            fontSize: 75.0,
+                            fontSize: 50.0,
+                            fontFamily: 'KGInimitableOriginal',
                             color: mainColor,
                             fontWeight: FontWeight.bold),
                       ),
@@ -183,8 +184,8 @@ class _PricingState extends State<Pricing> {
                         height: MediaQuery.of(context).size.height * 0.07,
                       ),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.05,
-                        width: MediaQuery.of(context).size.width * 0.90,
+                        height: MediaQuery.of(context).size.height * 0.06,
+                        width: MediaQuery.of(context).size.width * 0.80,
                         child: RaisedButton(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15.0)),

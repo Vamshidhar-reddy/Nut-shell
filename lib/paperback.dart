@@ -57,7 +57,7 @@ class _PaperbacksState extends State<Paperbacks> {
         enlargeCenterPage: true,
         autoPlay: false,
         pauseAutoPlayOnTouch: true,
-        height: MediaQuery.of(context).size.height * 0.8,
+        height: MediaQuery.of(context).size.height * 0.7,
       ),
       items: paper.map((back) {
         return Builder(
@@ -68,7 +68,7 @@ class _PaperbacksState extends State<Paperbacks> {
                   child: Container(
                       height: MediaQuery.of(context).size.height * 0.6,
                       width: MediaQuery.of(context).size.width,
-                      margin: EdgeInsets.symmetric(horizontal: 10.0),
+                      margin: EdgeInsets.symmetric(horizontal: 2.0),
                       decoration: BoxDecoration(color: Colors.grey[300]),
                       child: GestureDetector(
                           child: CachedNetworkImage(
@@ -91,9 +91,10 @@ class _PaperbacksState extends State<Paperbacks> {
                           })),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child:
-                      Text(back.data["title"], style: TextStyle(fontSize: 20)),
+                  padding: const EdgeInsets.all(20.0),
+                  child: Text(back.data["title"],
+                      style: TextStyle(
+                          fontSize: 20, fontFamily: 'KGInimitableOriginal')),
                 )
               ],
             );

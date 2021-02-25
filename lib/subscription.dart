@@ -49,26 +49,29 @@ class _SubscriptionState extends State<Subscription> {
     299,
   ];
   static const Map<String, List<String>> subName = {
-    "Trial": [
-      "7 Days trial",
+    "7 Days Trial": [
+      // "7 Days trial",
       "2 FREE issues of Nutshell",
       " Digital Paperback",
     ],
-    "Basic": [
+    "4 Month Plan": [
+      // "4 Month Plan",
       "2 Digital Paperbacks ",
       "2 Issues of Nutshell Digital Paperback",
       "(Published once every two months)",
       "Plus",
       "2 FREE Digital Paperbacks",
     ],
-    "Standard": [
+    "6 Month Plan": [
+      // "6 Month Plan",
       "4 Digital Paperbacks",
       "4 Issues of Nutshell Digital Paperback",
       "(Published once every two months)",
       "Plus",
       "2 FREE Digital Paperbacks",
     ],
-    "Premium": [
+    "12 Month Plan": [
+      // "12 Month Plan",
       "6 Digital Paperbacks ",
       "6 Issues of Nutshell Digital Paperback",
       "(Published once every two months)",
@@ -99,7 +102,7 @@ class _SubscriptionState extends State<Subscription> {
                 height: MediaQuery.of(context).size.height * 0.1,
                 width: MediaQuery.of(context).size.width * 0.7,
                 child: Container(
-                  margin: EdgeInsets.fromLTRB(30, 15, 30, 10),
+                  // margin: EdgeInsets.fromLTRB(30, 15, 30, 10),
                   child: Image(
                     fit: BoxFit.fill,
                     image: mainLogo,
@@ -108,16 +111,20 @@ class _SubscriptionState extends State<Subscription> {
               ),
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.05),
-            Text(
-              "Select a subscription plan",
-              textAlign: TextAlign.center,
-              softWrap: true,
-              style: TextStyle(
-                  color: mainColor,
-                  fontSize: 30.0,
-                  fontWeight: FontWeight.bold),
+            Padding(
+              padding: const EdgeInsets.only(left: 15.0, right: 15.0),
+              child: Text(
+                "SELECT A SUBSCRIPTION PLAN",
+                textAlign: TextAlign.left,
+                softWrap: true,
+                style: TextStyle(
+                    fontSize: MediaQuery.of(context).size.width * 0.07,
+                    fontFamily: 'KGInimitableOriginal',
+                    color: mainColor,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.02),
 
             Expanded(
               child: new ListView.builder(
@@ -139,12 +146,13 @@ class _SubscriptionState extends State<Subscription> {
                             },
                             children: [
                               new ExpansionPanel(
+                                  canTapOnHeader: true,
                                   isExpanded: _activeInd == i,
                                   headerBuilder: (BuildContext context,
                                           bool isExpanded) =>
                                       new Container(
-                                          margin: EdgeInsets.fromLTRB(
-                                              10, 22, 0, 25),
+                                          margin:
+                                              EdgeInsets.fromLTRB(0, 22, 0, 25),
                                           decoration: BoxDecoration(
                                             color: mainColor,
                                             borderRadius:
@@ -196,7 +204,7 @@ class _SubscriptionState extends State<Subscription> {
                                           widList.add(Padding(
                                             padding: const EdgeInsets.all(8.0),
                                             child: RaisedButton(
-                                              color: mainColor,
+                                              color: Colors.white,
                                               shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(
@@ -246,17 +254,17 @@ class _SubscriptionState extends State<Subscription> {
                                                             Details()));
                                               },
                                               child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(12.0),
-                                                child: Text("CONFIRM",
-                                                    style: TextStyle(
+                                                  padding: const EdgeInsets.all(
+                                                      12.0),
+                                                  child: Text("CONFIRM",
+                                                      style: TextStyle(
                                                         fontFamily:
                                                             "Montserret",
                                                         fontSize: 25,
                                                         fontWeight:
                                                             FontWeight.normal,
-                                                        color: Colors.white)),
-                                              ),
+                                                        color: Colors.green,
+                                                      ))),
                                             ),
                                           ));
                                           return Padding(

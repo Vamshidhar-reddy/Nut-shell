@@ -13,6 +13,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nutshell/users.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'account.dart';
+import 'google.dart';
+import 'login.dart';
 
 class BottomBar extends StatefulWidget {
   BottomBar({Key key}) : super(key: key);
@@ -72,6 +74,7 @@ class _BottomBarState extends State<BottomBar> {
                                     SizedBox(
                                       height: 10.0,
                                     ),
+                                    // actions:<Widget>[]
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
@@ -82,6 +85,25 @@ class _BottomBarState extends State<BottomBar> {
                                           },
                                           child: Text(
                                             'Extend',
+                                            style: TextStyle(
+                                              fontSize: 24,
+                                              color: Color.fromRGBO(
+                                                  109, 0, 109, 1),
+                                            ),
+                                          ),
+                                        ),
+                                        FlatButton(
+                                          onPressed: () {
+                                            signOutGoogle();
+                                            Navigator.of(context)
+                                                .pushAndRemoveUntil(
+                                                    MaterialPageRoute(
+                                                        builder: (ctx) =>
+                                                            LoginScreen()),
+                                                    (_) => false);
+                                          },
+                                          child: Text(
+                                            'Logout',
                                             style: TextStyle(
                                               fontSize: 24,
                                               color: Color.fromRGBO(
@@ -162,7 +184,7 @@ class _BottomBarState extends State<BottomBar> {
         items: [
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              "assets/images/PAPERBACKICON.svg",
+              "assets/images/paperbackicon.svg",
               fit: BoxFit.contain,
               // color:Colors.red,
               height: 40,
@@ -172,7 +194,7 @@ class _BottomBarState extends State<BottomBar> {
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              "assets/images/NEWSICON.svg",
+              "assets/images/newsicon.svg",
               fit: BoxFit.contain,
               // color:Colors.red,
               height: 40,
@@ -181,7 +203,7 @@ class _BottomBarState extends State<BottomBar> {
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
-              "assets/images/ACCOUNTICON.svg",
+              "assets/images/accounticon.svg",
               fit: BoxFit.contain,
               // color:Colors.red,
               height: 40,

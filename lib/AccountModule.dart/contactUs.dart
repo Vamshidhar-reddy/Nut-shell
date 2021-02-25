@@ -56,8 +56,11 @@ class ContactUs extends StatelessWidget {
                 height: 100),
           ),
           Padding(padding: EdgeInsets.all(10.0)),
-          Text(
-            "If you have any questions or feedback, please reach out to us:",
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+            child: Text(
+              "If you have any questions or feedback, please reach out to us:",
+            ),
           ),
           Text("\n"),
           Container(
@@ -77,7 +80,7 @@ class ContactUs extends StatelessWidget {
                           style: TextStyle(color: mainColor, fontSize: 12),
                         ),
                         SizedBox(
-                            height: 75,
+                            height: MediaQuery.of(context).size.height * 0.12,
                             width: MediaQuery.of(context).size.width * 0.8,
                             child: Text(
                               " \nQuizzora & Co., 2nd Floor, Basera Apartment, Hill Cart, Road, 13/6 B.M. Saran, Mahananda Para, Near Bata Lane,Siliguri - 734001",
@@ -170,8 +173,7 @@ class ContactUs extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text("    EMAIL",
-                      style: TextStyle(
-                          color: mainColor, fontSize: 12)),
+                      style: TextStyle(color: mainColor, fontSize: 12)),
                 ],
               )),
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
@@ -185,7 +187,7 @@ class ContactUs extends StatelessWidget {
                   children: <Widget>[
                     Icon(
                       Icons.email,
-                      color:mainColor,
+                      color: mainColor,
                     ),
                     Text("      ")
                   ],

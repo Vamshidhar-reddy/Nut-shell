@@ -11,6 +11,7 @@ import 'package:nutshell/model/userdetails.dart';
 import 'package:nutshell/paperback.dart';
 import 'package:nutshell/login.dart';
 import 'package:nutshell/paperback.dart';
+import 'package:nutshell/phone.dart';
 import 'package:nutshell/splashscreen.dart';
 import 'package:flutter/services.dart';
 import 'package:nutshell/subscription.dart';
@@ -74,7 +75,7 @@ class _MyAppState extends State<MyApp> {
           '/bottombar': (BuildContext context) => BottomBar(),
           '/email': (BuildContext context) => new Email(),
           '/birth': (BuildContext context) => new BirthDay(),
-          '/instution': (BuildContext context) => new Instution(),
+          // '/instution': (BuildContext context) => new Instution(),
           '/pincode': (BuildContext context) => new PinCode(),
           '/paperback': (BuildContext context) => Paperbacks(),
           '/group': (BuildContext context) => GroupScreen(),

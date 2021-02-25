@@ -26,15 +26,19 @@ class OrderConfirmation extends StatelessWidget {
           child: ListView(children: <Widget>[
             Container(
                 padding: EdgeInsets.only(
-                    left: 20.0, top:MediaQuery.of(context).size.height*0.2, bottom: 10.0, right: 10.0),
+                    left: 20.0,
+                    top: MediaQuery.of(context).size.height * 0.2,
+                    bottom: 10.0,
+                    right: 10.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      'Thank You for your order!',
+                      'THANK YOU FOR YOUR ORDER!',
                       style: TextStyle(
                         fontSize: headings,
+                        fontFamily: 'KGInimitableOriginal',
                         fontWeight: FontWeight.bold,
                         color: mainColor,
                       ),
